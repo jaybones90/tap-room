@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Keg } from './keg.model';
 
 
 
@@ -22,21 +22,8 @@ import { Component } from '@angular/core';
 
 
 
-    <div class="row">
-      <div *ngFor="let keg of kegs" class="col-sm-1 bottledisplay">
-        <div (click)="selectedKeg = keg">
-          <div class="bottle">
-            <img class="bottleeffect" src={{keg.bottle}}>
-          </div>
-          <p [class]="chooseColor(keg)">{{keg.brand}} {{keg.name}} {{keg.style}} <br> Remaining Pints: {{keg.pints}}</p>
-          <input type='radio' [(ngModel)]="growlerSize" [value]='1'>Single Pint<br>
-          <input type='radio' [(ngModel)]="growlerSize" [value]='2'>Small Growler<br>
-          <input type='radio' [(ngModel)]="growlerSize" [value]='4'>Large Growler<br>
-          <button (click)="pourGrowler(keg, growlerSize)" class="btn">Pour Growler</button>
+    <keg-list [childKegList]="masterKegList" (clickSender)="selectKeg($event)"></keg-list>
 
-        </div>
-      </div>
-    </div>
 
 
 
@@ -118,7 +105,7 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
 
-  kegs: Keg[] = [
+  masterKegList: Keg[] = [
     new Keg('Stone IPA', 'Stone', 5.00, '6.9%', 'http://brickovencb.com/wp-content/uploads/2013/06/IPA_label_small.jpg', 'India Pale Ale', 'https://www.stonebrewing.com/sites/default/files/beer/menu/ipa_bottle_11.png'),
     new Keg('Black Butte', 'Deschutes', 5.25, '5.2%', 'http://www.thepizzapress.com/wp-content/uploads/2016/11/black_butte_porte_logo.jpg', 'Porter', 'https://www.deschutesbrewery.com/wp-content/uploads/2015/04/NS_bottle_36644_Deschutes_BlackButte12_Comp_R4_SMP3.png'),
     new Keg('Brooklyn', 'Brown Ale', 6.25, '5.6%', 'http://libationfront.com/wp-content/uploads/2015/02/361_Brooklyn-Brewery-Logo-w-Wings.jpeg.jpg', 'Porter', 'https://s-media-cache-ak0.pinimg.com/originals/4a/96/04/4a96041318369dfde3db92f974082fb2.png'),
@@ -151,24 +138,10 @@ export class AppComponent {
     this.editForm = null;
   }
 
-  pourGrowler(keg, growlerSize) {
-
-    keg.pints>=growlerSize ? keg.pints -= growlerSize : undefined;
+  selectKeg(keg) {
+    this.selectedKeg = keg;
   }
 
-  chooseColor(keg) {
-    if(keg.pints <= 10) {
-      return 'bg-red';
-    } else if (keg.pints <= 30) {
-      return 'bg-orange';
-    } else if (keg.pints <= 50) {
-      return 'bg-yellow';
-    } else if (keg.pints <= 75) {
-      return 'bg-green';
-    } else {
-      return 'bg-blue';
-    }
-  }
 
   choosePriceColor() {
     if(this.selectedKeg.price >= 10) {
@@ -182,19 +155,13 @@ export class AppComponent {
     }
   }
 
+
+
   sortKegs() {
     this.kegs.sort(function(a, b) {
       return parseFloat(b.alcoholC) - parseFloat(a.alcoholC);
     });
   }
 
-
-}
-
-export class Keg {
-
-  public pints: number = 124;
-
-  constructor(public name: string, public brand: string, public price: number, public alcoholC: string, public image: string, public style: string, public bottle: string) {}
 
 }
