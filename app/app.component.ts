@@ -9,14 +9,18 @@ import { Component } from '@angular/core';
   <div class="container">
     <h1>Tap Room</h1>
 
-    <div>
-      <ul *ngFor="let keg of kegs">
-        <li (click)="selectedKeg = keg" [class]="chooseColor(keg)">{{keg.brand}} {{keg.name}} - Remaining Pints:{{keg.pints}}</li>
-        <button (click)="pourPint(keg)">Pour Pint</button>
-        <input type='radio' [(ngModel)]="growlerSize" [value]='2'>Small
-        <input type='radio' [(ngModel)]="growlerSize" [value]='4'>Large
-        <button (click)="pourGrowler(keg, growlerSize)">Pour Growler</button>
-      </ul>
+    <div class ="row">
+      <div *ngFor="let keg of kegs" class="col-sm-2 bottledisplay">
+        <ul >
+          <img src={{keg.bottle}}>
+          <li (click)="selectedKeg = keg" [class]="chooseColor(keg)">{{keg.brand}} {{keg.name}} {{keg.style}}- Remaining Pints:{{keg.pints}}</li>
+          <button (click)="pourPint(keg)">Pour Pint</button>
+          <input type='radio' [(ngModel)]="growlerSize" [value]='2'>Small
+          <input type='radio' [(ngModel)]="growlerSize" [value]='4'>Large
+          <button (click)="pourGrowler(keg, growlerSize)">Pour Growler</button>
+
+        </ul>
+      </div>
       <button (click)="showNewForm()">Enter A New Keg</button>
     </div>
 
@@ -81,16 +85,20 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   kegs: Keg[] = [
-    new Keg('Stone IPA', 'Stone', 5.00, '6.9%', 'http://brickovencb.com/wp-content/uploads/2013/06/IPA_label_small.jpg', 'India Pale Ale'),
-    new Keg('Terminator', 'McMenamins', 5.75, '6.45%', 'http://beerimages.pintley.com/8838/mcmenterm_large.png', 'Stout'),
-    new Keg('Black Butte Porter', 'Deschutes', 5.25, '5.2%', 'http://www.thepizzapress.com/wp-content/uploads/2016/11/black_butte_porte_logo.jpg', 'Porter'),
+    new Keg('Stone IPA', 'Stone', 5.00, '6.9%', 'http://brickovencb.com/wp-content/uploads/2013/06/IPA_label_small.jpg', 'India Pale Ale', 'https://www.stonebrewing.com/sites/default/files/beer/menu/ipa_bottle_11.png'),
+    new Keg('Black Butte', 'Deschutes', 5.25, '5.2%', 'http://www.thepizzapress.com/wp-content/uploads/2016/11/black_butte_porte_logo.jpg', 'Porter', 'https://www.deschutesbrewery.com/wp-content/uploads/2015/04/NS_bottle_36644_Deschutes_BlackButte12_Comp_R4_SMP3.png'),
+    new Keg('Brooklyn', 'Brown Ale', 6.25, '5.6%', 'http://libationfront.com/wp-content/uploads/2015/02/361_Brooklyn-Brewery-Logo-w-Wings.jpeg.jpg', 'Porter', 'https://s-media-cache-ak0.pinimg.com/originals/4a/96/04/4a96041318369dfde3db92f974082fb2.png'),
+    new Keg('Vienna', 'Moody Ales', 10.50, '6.75%', 'https://lh3.googleusercontent.com/-dj4mUWWLpO4/Vwj9mDAH0tI/AAAAAAAEHFg/sGq0PHH8Gas/image_thumb.png?imgmax=800', 'Lager', 'http://www.moodyales.com/img/beers/vienna-lager/bottle.png'),
+    new Keg('Special Export', 'Guinness', 6.75, '8.0%', 'http://logodatabases.com/wp-content/uploads/2012/03/guinness-logo-black-1024x1024.jpg', 'Stout', 'http://www.bruguru.com/guinnessspecialexportlarge.gif'),
+    new Keg('White Chocolate', 'Westwood', 9.75, '6.5%', 'https://pbs.twimg.com/profile_images/734649144023879680/rGLCgGIB.jpg', 'Stout', 'http://www.ilkleybrewery.co.uk/images/uploads/beers/bottleimg/_main/Westwood330ml_cutout_web_risized2.png'),
+    new Keg('Terminator', 'McMenamins', 5.75, '6.45%', 'http://beerimages.pintley.com/8838/mcmenterm_large.png', 'Stout', 'http://dicksbeer.com/wp-content/uploads/2016/12/beerbottletransparent.png'),
   ];
   selectedKeg = null;
   newKeg: Keg = null;
   editForm = null;
 
   showNewForm() {
-    this.newKeg = new Keg("", "", 0, "", "", "");
+    this.newKeg = new Keg("", "", 0, "", "", "", "");
   }
 
   submitNewKeg() {
@@ -155,6 +163,6 @@ export class Keg {
 
   public pints: number = 124;
 
-  constructor(public name: string, public brand: string, public price: number, public alcoholC: string, public image: string, public style: string) {}
+  constructor(public name: string, public brand: string, public price: number, public alcoholC: string, public image: string, public style: string, public bottle: string) {}
 
 }
