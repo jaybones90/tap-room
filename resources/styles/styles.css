@@ -2,12 +2,34 @@ img {
   max-width: 300px;
 }
 
+body {
+  text-shadow: 2px 2px black;
+}
+
+.showborder {
+  border:3px solid black;
+  border-color: #ff8533;
+  border-width: 0px 0px 10px 0px;
+}
+
+hr {
+  border:3px solid black;
+  border-color: #ff8533;
+  border-width: 0px 0px 10px 0px;
+}
+
 .bottledisplay {
   text-align: center;
-  font-family: 'Mogra', cursive;
+  margin-top: 30px;
+  margin-left: 30px;
+  padding-top: 30px;
+  padding-left: 0px;
+  display: inline;
+  width: 240px;
+  font-family: 'Poiret One', cursive;
+  font-size: 18px;
   text-shadow: 2px 2px black;
   color: white;
-  margin-top: 30px;
 }
 
 .bottledisplay img {
@@ -70,6 +92,63 @@ body {
   text-align: center;
 }
 
+.btn {
+  color: tan;
+  text-shadow: 2px 2px darkred;
+  font-family: 'Lobster', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #ff0000;
+  border:3px solid black;
+  border-color: #ff8533;
+  border-width: 2px 2px 2px 2px;
+}
+
+.bg-red {
+  background-color: green;
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#990000, #ff80b3); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#990000, #ff80b3); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#990000, #ff80b3); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#990000, #ff80b3); /* Standard syntax */
+}
+
+.bg-orange {
+  background-color: green;
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#b36b00, #ffc266); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#b36b00, #ffc266); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#b36b00, #ffc266); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#b36b00, #ffc266); /* Standard syntax */
+}
+
+.bg-yellow {
+  background-color: green;
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#997a00, #ffe066); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#997a00, #ffe066); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#997a00, #ffe066); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#997a00, #ffe066); /* Standard syntax */
+}
+
+.bg-green {
+  background-color: green;
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#145214, #5cd65c); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#145214, #5cd65c); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#145214, #5cd65c); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#145214, #5cd65c); /* Standard syntax */
+}
+
+.bg-blue {
+  background: red; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#00394d, #4dd2ff); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#00394d, #4dd2ff); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#00394d, #4dd2ff); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#00394d, #4dd2ff); /* Standard syntax */
+}
+
+
 .bottleeffect {
   display: inline-block;
   vertical-align: middle;
@@ -78,6 +157,7 @@ body {
   box-shadow: 0 0 1px transparent;
   filter: brightness(0.45);
 }
+
 .bottleeffect:hover, .bottleeffect:focus, .bottleeffect:active {
   -webkit-animation-name: bottleeffect-float, bottleeffect;
   animation-name: bottleeffect-float, bottleeffect;

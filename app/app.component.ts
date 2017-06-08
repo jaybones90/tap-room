@@ -10,23 +10,43 @@ import { Component } from '@angular/core';
     <div class="topbar">
       <img src="http://www.pourtaproom.com/wp-content/themes/pourtap2016/library/img/logo.png"/><h1>Tap Room</h1>
     </div>
+    <div class="row showborder">
 
-    <div class ="row">
+    <div class="row centered">
+      <p><span class="largetext">-&#123; </span><span class="smalltext">JUNE</span><span class="largetext"> HAPPY HOUR </span><span class="smalltext">2017</span><span class="largetext"> &#125;-</span></p>
+    </div>
+    <div class="row centered">
+      <p class="mediumtext">4:00PM - 6:00PM EVERYDAY</p>
+    </div>
+    </div>
+
+
+
+    <div class="row">
       <div *ngFor="let keg of kegs" class="col-sm-1 bottledisplay">
-        <ul (click)="selectedKeg = keg">
+        <div (click)="selectedKeg = keg">
           <div class="bottle">
             <img class="bottleeffect" src={{keg.bottle}}>
           </div>
-          <li [class]="chooseColor(keg)">{{keg.brand}} {{keg.name}} {{keg.style}} - Remaining Pints:{{keg.pints}}</li>
-          <button (click)="pourPint(keg)">Pour Pint</button><br>
-          <input type='radio' [(ngModel)]="growlerSize" [value]='2'>Small <br>
-          <input type='radio' [(ngModel)]="growlerSize" [value]='4'>Large
-          <button (click)="pourGrowler(keg, growlerSize)">Pour Growler</button>
+          <p [class]="chooseColor(keg)">{{keg.brand}} {{keg.name}} {{keg.style}} <br> Remaining Pints: {{keg.pints}}</p>
+          <input type='radio' [(ngModel)]="growlerSize" [value]='1'>Single Pint<br>
+          <input type='radio' [(ngModel)]="growlerSize" [value]='2'>Small Growler<br>
+          <input type='radio' [(ngModel)]="growlerSize" [value]='4'>Large Growler<br>
+          <button (click)="pourGrowler(keg, growlerSize)" class="btn">Pour Growler</button>
 
-        </ul>
+        </div>
       </div>
-      <button (click)="showNewForm()">Enter A New Keg</button>
     </div>
+
+
+
+    <div class="row centered">
+      <br>
+      <button (click)="showNewForm()" class="btn">Enter A New Keg</button>
+    </div>
+
+
+
 
     <hr>
     <h1>Low Kegs</h1>
@@ -37,6 +57,10 @@ import { Component } from '@angular/core';
     </div>
     <hr>
 
+
+
+
+
     <div *ngIf='selectedKeg'>
       <h3>{{selectedKeg.brand}}</h3>
       <h4>{{selectedKeg.name}}</h4>
@@ -46,12 +70,12 @@ import { Component } from '@angular/core';
         <li>{{selectedKeg.style}}</li>
         <img src={{selectedKeg.image}}>
       </ul>
-      <button (click)="editKeg()">Edit Keg</button><br>
+      <button (click)="editKeg()" class="btn">Edit Keg</button><br>
 
-      <button (click)="selectedKeg = null;">Hide Details</button>
+      <button (click)="selectedKeg = null;" class="btn">Hide Details</button>
     </div>
 
-    <div *ngIf="newKeg" class='form-control'>
+    <div *ngIf="newKeg">
       <label>Enter Keg Brand:</label>
       <input [(ngModel)]="newKeg.brand" type='text' class='form-control'><br>
       <label>Enter Keg Name:</label>
@@ -62,8 +86,11 @@ import { Component } from '@angular/core';
       <input [(ngModel)]="newKeg.alcoholC" type='text' class='form-control'><br>
       <label>Enter Beer Style:</label>
       <input [(ngModel)]="newKeg.style" type='text' class='form-control'><br>
-      <label>Enter Image URL:</label>
+      <label>Enter Logo Image URL:</label>
       <input [(ngModel)]="newKeg.image" type='text' class='form-control'><br>
+      <label>Enter Bottle Image URL:</label>
+      <input [(ngModel)]="newKeg.bottle" type='text' class='form-control'><br>
+
       <button (click)="submitNewKeg()">Submit</button>
     </div>
 
@@ -78,8 +105,11 @@ import { Component } from '@angular/core';
       <input [(ngModel)]="selectedKeg.alcoholC" type='text' class='form-control'><br>
       <label>Enter Beer Style:</label>
       <input [(ngModel)]="selectedKeg.style" type='text' class='form-control'><br>
-      <label>Enter Image URL:</label>
+      <label>Enter Logo Image URL:</label>
       <input [(ngModel)]="selectedKeg.image" type='text' class='form-control'><br>
+      <label>Enter Bottle Image URL:</label>
+      <input [(ngModel)]="selectedKeg.bottle" type='text' class='form-control'><br>
+
       <button (click)="hideEditForm()">Submit</button>
     </div>
 
@@ -121,10 +151,6 @@ export class AppComponent {
     this.editForm = null;
   }
 
-  pourPint(keg) {
-    keg.pints>=1 ? keg.pints -= 1 : undefined;
-  }
-
   pourGrowler(keg, growlerSize) {
 
     keg.pints>=growlerSize ? keg.pints -= growlerSize : undefined;
@@ -132,13 +158,15 @@ export class AppComponent {
 
   chooseColor(keg) {
     if(keg.pints <= 10) {
-      return 'bg-danger';
-    } else if (keg.pints <= 20) {
-      return 'bg-warning';
+      return 'bg-red';
+    } else if (keg.pints <= 30) {
+      return 'bg-orange';
     } else if (keg.pints <= 50) {
-      return 'bg-info';
+      return 'bg-yellow';
+    } else if (keg.pints <= 75) {
+      return 'bg-green';
     } else {
-      return 'bg-primary';
+      return 'bg-blue';
     }
   }
 
