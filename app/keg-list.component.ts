@@ -5,9 +5,9 @@ import { Keg } from './keg.model';
   selector: 'keg-list',
   template: `
 
-  <div>
+  <div class='new-keg'>
   <label>Enter A Price To Filter Keg List</label>
-  <input [(ngModel)]='price'>
+  <input [(ngModel)]='price' type='number' min='0' max='100'>
   </div>
 
   <div class="row">
@@ -35,7 +35,7 @@ import { Keg } from './keg.model';
 export class KegListComponent {
   @Input() childKegList: Keg[];
   @Output() clickSender = new EventEmitter();
-  price = 1000;
+  price = 100;
 
   bottleClicked(selectedKeg) {
     this.clickSender.emit(selectedKeg);

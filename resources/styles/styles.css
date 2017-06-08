@@ -61,6 +61,32 @@ hr {
   margin-right: 40px;
 }
 
+.lowkegs {
+  color: tan;
+  text-shadow: 4px 4px darkred;
+  font-size: 30px;
+  background-color: rgba(110, 110, 110, 0.5);
+}
+
+.lowkegs li {
+    list-style: none;
+}
+
+.new-keg {
+  color: tan;
+  text-shadow: 4px 4px darkred;
+  font-size: 25px;
+  max-width: 40%;
+  text-align: center;
+  background-color: rgba(110, 110, 110, 0.5);
+  align-content: center;
+  padding: 40px;
+  border-radius: 20px;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 40px;
+}
+
 h1 {
   font-family: 'Lobster', cursive;
   font-size: 90px;
@@ -90,6 +116,7 @@ body {
 
 .centered {
   text-align: center;
+  align-content: center;
 }
 
 .btn {

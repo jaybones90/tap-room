@@ -4,7 +4,9 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'new-keg',
   template: `
-  <div *ngIf="newKeg">
+
+  <div *ngIf="newKeg" class='new-keg'>
+    <h1>New Keg Form</h1><br>
     <label>Enter Keg Brand:</label>
     <input [(ngModel)]="newKeg.brand" type='text' class='form-control'><br>
     <label>Enter Keg Name:</label>
@@ -20,8 +22,9 @@ import { Keg } from './keg.model';
     <label>Enter Bottle Image URL:</label>
     <input [(ngModel)]="newKeg.bottle" type='text' class='form-control'><br>
 
-    <button (click)="submitNewKeg(newKeg)">Submit</button>
+    <button (click)="submitNewKeg(newKeg)" class="btn">Submit</button>
   </div>
+
   `
 })
 

@@ -21,7 +21,7 @@ import { Keg } from './keg.model';
     <label>Enter Bottle Image URL:</label>
     <input [(ngModel)]="kegToEdit.bottle" type='text' class='form-control'><br>
 
-     <button (click)="submitEditForm()">Submit</button>
+     <button (click)="submitEditForm()" class="btn">Submit</button>
   </div>
 
   `

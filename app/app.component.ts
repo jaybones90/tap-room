@@ -29,7 +29,7 @@ import { Keg } from './keg.model';
 
     <hr>
     <h1>Low Kegs</h1>
-    <div>
+    <div class="lowkegs">
       <ul *ngFor="let keg of masterKegList">
         <li *ngIf="keg.pints<10">{{keg.brand}} {{keg.name}} - Remaining Pints:{{keg.pints}}</li>
       </ul>
