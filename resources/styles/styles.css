@@ -45,7 +45,8 @@ hr {
   height: 160px;
   float:left;
   display: flex;
-  background-image:url('http://www.myfreetextures.com/wp-content/uploads/2014/10/texture-seamless-wood-5.jpg');
+  background-image:url('../../resources/images/woodTexture.jpg');
+
   background-repeat: repeat-x;
   z-index: 3;
   border:3px solid black;

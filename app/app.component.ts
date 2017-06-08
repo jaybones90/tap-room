@@ -7,6 +7,8 @@ import { Keg } from './keg.model';
   selector: 'app-root',
   template: `
 
+
+
     <div class="topbar">
       <img src="http://www.pourtaproom.com/wp-content/themes/pourtap2016/library/img/logo.png"/><h1>Tap Room</h1>
     </div>
@@ -53,7 +55,7 @@ import { Keg } from './keg.model';
     </div>
 
     <edit-keg [kegToEdit]="kegToEdit"></edit-keg>
-
+    <img src="/resources/images/blankBottle.png"/>
   `
 })
 
@@ -74,7 +76,7 @@ export class AppComponent {
   kegDetailsArray: Keg[] = [];
 
   showNewForm() {
-    this.newKeg = new Keg("", "", 0, "", "", "", "");
+    this.newKeg = new Keg("", "", 0, "", "", "", "http://dicksbeer.com/wp-content/uploads/2016/12/beerbottletransparent.png");
   }
 
   submitNewKeg(newKeg) {
@@ -91,7 +93,7 @@ export class AppComponent {
 
   selectKeg(keg) {
     this.selectedKeg = keg;
-    if (this.kegDetailsArray.includes(keg) == false) {
+    if (this.kegDetailsArray.indexOf(keg) == -1) {
       this.kegDetailsArray.push(keg);
     }
 
