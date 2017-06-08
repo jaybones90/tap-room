@@ -5,10 +5,15 @@ import { Keg } from './keg.model';
   selector: 'keg-list',
   template: `
 
+  <div>
+  <label>Enter A Price To Filter Keg List</label>
+  <input [(ngModel)]='price'>
+  </div>
+
   <div class="row">
-    <div *ngFor="let keg of childKegList; let i = index" class="col-xs-1 bottledisplay" [attr.data-index]="i">
-      <div (click)="selectedKeg = keg; bottleClicked(selectedKeg)">
-        <div class="bottle">
+    <div *ngFor="let keg of childKegList | priciness:price; let i = index" class="col-xs-1 bottledisplay" [attr.data-index]="i">
+      <div>
+        <div (click)="selectedKeg = keg; bottleClicked(selectedKeg)" class="bottle">
           <img class="bottleeffect" src={{keg.bottle}}>
         </div>
         <p [class]="chooseColor(keg)">{{keg.brand}} {{keg.name}} {{keg.style}} <br> Remaining Pints: {{keg.pints}}</p>
@@ -30,6 +35,7 @@ import { Keg } from './keg.model';
 export class KegListComponent {
   @Input() childKegList: Keg[];
   @Output() clickSender = new EventEmitter();
+  price = 1000;
 
   bottleClicked(selectedKeg) {
     this.clickSender.emit(selectedKeg);
