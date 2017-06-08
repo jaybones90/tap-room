@@ -24,7 +24,7 @@ import { Keg } from './keg.model';
 
     <keg-list [childKegList]="masterKegList" (clickSender)="selectKeg($event)"></keg-list>
 
-
+    <new-keg [newKeg]="newKeg" (newKegSender)="submitNewKeg($event)"></new-keg>
 
 
     <div class="row centered">
@@ -62,43 +62,7 @@ import { Keg } from './keg.model';
       <button (click)="selectedKeg = null;" class="btn">Hide Details</button>
     </div>
 
-    <div *ngIf="newKeg">
-      <label>Enter Keg Brand:</label>
-      <input [(ngModel)]="newKeg.brand" type='text' class='form-control'><br>
-      <label>Enter Keg Name:</label>
-      <input [(ngModel)]="newKeg.name" type='text' class='form-control'><br>
-      <label>Enter Price Per Pint:</label>
-      <input [(ngModel)]="newKeg.price" type='number' class='form-control'><br>
-      <label>Enter Alcohol Content:</label>
-      <input [(ngModel)]="newKeg.alcoholC" type='text' class='form-control'><br>
-      <label>Enter Beer Style:</label>
-      <input [(ngModel)]="newKeg.style" type='text' class='form-control'><br>
-      <label>Enter Logo Image URL:</label>
-      <input [(ngModel)]="newKeg.image" type='text' class='form-control'><br>
-      <label>Enter Bottle Image URL:</label>
-      <input [(ngModel)]="newKeg.bottle" type='text' class='form-control'><br>
-
-      <button (click)="submitNewKeg()">Submit</button>
-    </div>
-
-    <div *ngIf="editForm" class='form-control'>
-      <label>Enter Keg Brand:</label>
-      <input [(ngModel)]="selectedKeg.brand" type='text' class='form-control'><br>
-      <label>Enter Keg Name:</label>
-      <input [(ngModel)]="selectedKeg.name" type='text' class='form-control'><br>
-      <label>Enter Price Per Pint:</label>
-      <input [(ngModel)]="selectedKeg.price" type='number' class='form-control'><br>
-      <label>Enter Alcohol Content:</label>
-      <input [(ngModel)]="selectedKeg.alcoholC" type='text' class='form-control'><br>
-      <label>Enter Beer Style:</label>
-      <input [(ngModel)]="selectedKeg.style" type='text' class='form-control'><br>
-      <label>Enter Logo Image URL:</label>
-      <input [(ngModel)]="selectedKeg.image" type='text' class='form-control'><br>
-      <label>Enter Bottle Image URL:</label>
-      <input [(ngModel)]="selectedKeg.bottle" type='text' class='form-control'><br>
-
-      <button (click)="hideEditForm()">Submit</button>
-    </div>
+    <edit-keg [kegToEdit]="kegToEdit"></edit-keg>
 
   `
 })
@@ -116,26 +80,22 @@ export class AppComponent {
   ];
   selectedKeg = null;
   newKeg: Keg = null;
-  editForm = null;
+  kegToEdit = null;
 
   showNewForm() {
     this.newKeg = new Keg("", "", 0, "", "", "", "");
   }
 
-  submitNewKeg() {
-    if (this.newKeg.name !== "") {
-      this.kegs.push(this.newKeg);
+  submitNewKeg(newKeg) {
+    if (newKeg.name !== "") {
+      this.masterKegList.push(newKeg);
     }
     this.sortKegs();
     this.newKeg = null;
   }
 
   editKeg() {
-    this.editForm = 1;
-  }
-
-  hideEditForm() {
-    this.editForm = null;
+    this.kegToEdit = this.selectedKeg;
   }
 
   selectKeg(keg) {
@@ -158,7 +118,7 @@ export class AppComponent {
 
 
   sortKegs() {
-    this.kegs.sort(function(a, b) {
+    this.masterKegList.sort(function(a, b) {
       return parseFloat(b.alcoholC) - parseFloat(a.alcoholC);
     });
   }

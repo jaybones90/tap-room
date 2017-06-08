@@ -1,12 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Keg } from './task.model';
+import { Keg } from './keg.model';
 
 @Component({
   selector: 'keg-list',
   template: `
 
   <div class="row">
-    <div *ngFor="let keg of childKegList" class="col-sm-1 bottledisplay">
+    <div *ngFor="let keg of childKegList; let i = index" class="col-sm-1 bottledisplay" [attr.data-index]="i">
       <div (click)="selectedKeg = keg; bottleClicked(selectedKeg)">
         <div class="bottle">
           <img class="bottleeffect" src={{keg.bottle}}>
@@ -16,6 +16,7 @@ import { Keg } from './task.model';
         <input type='radio' [(ngModel)]="growlerSize" [value]='2'>Small Growler<br>
         <input type='radio' [(ngModel)]="growlerSize" [value]='4'>Large Growler<br>
         <button (click)="pourGrowler(keg, growlerSize)" class="btn">Pour Growler</button>
+        <button (click)="deleteKeg(i)" class="btn">Delete Keg</button>
 
       </div>
     </div>
@@ -27,7 +28,7 @@ import { Keg } from './task.model';
 
 
 export class KegListComponent {
-  @Input() childKegList: Task[];
+  @Input() childKegList: Keg[];
   @Output() clickSender = new EventEmitter();
 
   bottleClicked(selectedKeg) {
@@ -50,6 +51,10 @@ export class KegListComponent {
 
   pourGrowler(keg, growlerSize) {
     keg.pints>=growlerSize ? keg.pints -= growlerSize : undefined;
+  }
+
+  deleteKeg(i) {
+    this.childKegList.splice(i, 1);
   }
 
 }
