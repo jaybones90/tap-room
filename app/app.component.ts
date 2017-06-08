@@ -8,13 +8,15 @@ import { Component } from '@angular/core';
   template: `
 
     <div class="topbar">
-      <h1>Tap Room</h1>
+      <img src="http://www.pourtaproom.com/wp-content/themes/pourtap2016/library/img/logo.png"/><h1>Tap Room</h1>
     </div>
 
     <div class ="row">
       <div *ngFor="let keg of kegs" class="col-sm-1 bottledisplay">
         <ul (click)="selectedKeg = keg">
-          <img class="bottleeffect" src={{keg.bottle}}>
+          <div class="bottle">
+            <img class="bottleeffect" src={{keg.bottle}}>
+          </div>
           <li [class]="chooseColor(keg)">{{keg.brand}} {{keg.name}} {{keg.style}} - Remaining Pints:{{keg.pints}}</li>
           <button (click)="pourPint(keg)">Pour Pint</button><br>
           <input type='radio' [(ngModel)]="growlerSize" [value]='2'>Small <br>
