@@ -11,29 +11,21 @@ import { Keg } from './keg.model';
       <img src="http://www.pourtaproom.com/wp-content/themes/pourtap2016/library/img/logo.png"/><h1>Tap Room</h1>
     </div>
     <div class="row showborder">
-
-    <div class="row centered">
-      <p><span class="largetext">-&#123; </span><span class="smalltext">JUNE</span><span class="largetext"> HAPPY HOUR </span><span class="smalltext">2017</span><span class="largetext"> &#125;-</span></p>
+      <div class="row centered">
+        <p><span class="largetext">-&#123; </span><span class="smalltext">JUNE</span><span class="largetext"> HAPPY HOUR </span><span class="smalltext">2017</span><span class="largetext"> &#125;-</span></p>
+      </div>
+      <div class="row centered">
+        <p class="mediumtext">4:00PM - 6:00PM EVERYDAY</p>
+      </div>
     </div>
-    <div class="row centered">
-      <p class="mediumtext">4:00PM - 6:00PM EVERYDAY</p>
-    </div>
-    </div>
-
-
 
     <keg-list [childKegList]="masterKegList" (clickSender)="selectKeg($event)"></keg-list>
-
     <new-keg [newKeg]="newKeg" (newKegSender)="submitNewKeg($event)"></new-keg>
-
 
     <div class="row centered">
       <br>
       <button (click)="showNewForm()" class="btn">Enter A New Keg</button>
     </div>
-
-
-
 
     <hr>
     <h1>Low Kegs</h1>
@@ -44,22 +36,20 @@ import { Keg } from './keg.model';
     </div>
     <hr>
 
-
-
-
-
     <div *ngIf='selectedKeg'>
-      <h3>{{selectedKeg.brand}}</h3>
-      <h4>{{selectedKeg.name}}</h4>
-      <ul>
-        <li [class]="choosePriceColor()"><span>$</span>{{selectedKeg.price}}</li>
-        <li>{{selectedKeg.alcoholC}}</li>
-        <li>{{selectedKeg.style}}</li>
-        <img src={{selectedKeg.image}}>
-      </ul>
-      <button (click)="editKeg()" class="btn">Edit Keg</button><br>
+      <div *ngFor='let thisKeg of kegDetailsArray'>
+        <h3>{{thisKeg.brand}}</h3>
+        <h4>{{thisKeg.name}}</h4>
+        <ul>
+          <li [class]="choosePriceColor()"><span>$</span>{{thisKeg.price}}</li>
+          <li>{{thisKeg.alcoholC}}</li>
+          <li>{{thisKeg.style}}</li>
+          <img src={{thisKeg.image}}>
+        </ul>
+        <button (click)="editKeg()" class="btn">Edit Keg</button><br>
 
-      <button (click)="selectedKeg = null;" class="btn">Hide Details</button>
+        <button (click)="selectedKeg = null; kegDetailsArray = []" class="btn">Hide Details</button>
+      </div>
     </div>
 
     <edit-keg [kegToEdit]="kegToEdit"></edit-keg>
@@ -81,6 +71,7 @@ export class AppComponent {
   selectedKeg = null;
   newKeg: Keg = null;
   kegToEdit = null;
+  kegDetailsArray: Keg[] = [];
 
   showNewForm() {
     this.newKeg = new Keg("", "", 0, "", "", "", "");
@@ -100,6 +91,8 @@ export class AppComponent {
 
   selectKeg(keg) {
     this.selectedKeg = keg;
+    this.kegDetailsArray.push(keg);
+    console.log(this.kegDetailsArray);
   }
 
 

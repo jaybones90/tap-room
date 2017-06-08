@@ -6,7 +6,7 @@ import { Keg } from './keg.model';
   template: `
 
   <div class="row">
-    <div *ngFor="let keg of childKegList; let i = index" class="col-sm-1 bottledisplay" [attr.data-index]="i">
+    <div *ngFor="let keg of childKegList; let i = index" class="col-xs-1 bottledisplay" [attr.data-index]="i">
       <div (click)="selectedKeg = keg; bottleClicked(selectedKeg)">
         <div class="bottle">
           <img class="bottleeffect" src={{keg.bottle}}>
