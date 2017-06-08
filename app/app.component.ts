@@ -6,16 +6,18 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-  <div class="container">
-    <h1>Tap Room</h1>
+
+    <div class="topbar">
+      <h1>Tap Room</h1>
+    </div>
 
     <div class ="row">
-      <div *ngFor="let keg of kegs" class="col-sm-2 bottledisplay">
-        <ul >
-          <img src={{keg.bottle}}>
-          <li (click)="selectedKeg = keg" [class]="chooseColor(keg)">{{keg.brand}} {{keg.name}} {{keg.style}}- Remaining Pints:{{keg.pints}}</li>
-          <button (click)="pourPint(keg)">Pour Pint</button>
-          <input type='radio' [(ngModel)]="growlerSize" [value]='2'>Small
+      <div *ngFor="let keg of kegs" class="col-sm-1 bottledisplay">
+        <ul (click)="selectedKeg = keg">
+          <img class="bottleeffect" src={{keg.bottle}}>
+          <li [class]="chooseColor(keg)">{{keg.brand}} {{keg.name}} {{keg.style}} - Remaining Pints:{{keg.pints}}</li>
+          <button (click)="pourPint(keg)">Pour Pint</button><br>
+          <input type='radio' [(ngModel)]="growlerSize" [value]='2'>Small <br>
           <input type='radio' [(ngModel)]="growlerSize" [value]='4'>Large
           <button (click)="pourGrowler(keg, growlerSize)">Pour Growler</button>
 
@@ -78,7 +80,7 @@ import { Component } from '@angular/core';
       <input [(ngModel)]="selectedKeg.image" type='text' class='form-control'><br>
       <button (click)="hideEditForm()">Submit</button>
     </div>
-  </div>
+
   `
 })
 
